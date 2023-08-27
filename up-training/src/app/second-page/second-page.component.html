@@ -1,0 +1,62 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mt-3" *ngFor="let student of students; let i = index;">
+                <div class="card-body">
+                    <span>{{(i+1)}}</span>
+                    <div class="row">
+                        <div class="col-6">
+                            <span>First Name: {{student.firstName}}</span>
+                        </div>
+                        <div class="col-6 text-end">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateStudent" (click)="setForm(student)">Edit</button>
+                            <button class="btn btn-danger" style="margin-left: 15px;" (click)="onDelete(student.studentId)">Delete</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            Last Name: {{student.lastName}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            Student Code: {{student.studentCode}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="updateStudent" tabindex="-1" aria-labelledby="updateStudentLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateStudentLabel">Update Student</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <form [formGroup]="form" #formElement="ngForm" (ngSubmit)="OnUpdate()">
+                <div class="col-12">
+                    <label>Student Id</label>
+                    <input type="text" class="form-control" [disabled]="true" formControlName="studentId">
+                </div>
+                <div class="col-12">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" formControlName="firstName">
+                </div>
+                <div class="col-12">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" formControlName="lastName">
+                </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="OnUpdate()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
